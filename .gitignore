@@ -9,3 +9,8 @@
 # Cloudflare
 .mf
 .wrangler
+
+# Environment variables
+.env
+.env.*
+!.env.example

@@ -1,0 +1,215 @@
+/* Universal reset for margin, padding, and box-sizing */
+
+/* Font faces */
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #04022b;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+/* Container styling */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  min-width: 37.5em;
+  padding: 1.25em;
+  border: 0.125em solid #ccc;
+  border-radius: 0.3125em;
+  background-color: #0a081f;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+}
+
+.track-info-container {
+  display: flex;
+  align-items: center;
+}
+
+.track-image {
+  max-width: 10.3125em;
+  max-height: 10.3125em;
+  border-radius: 0.3125em;
+  margin-right: 1.25em;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.progress-bar-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 0.5em;
+  background-color: #333;
+  border-radius: 0.25em;
+  margin-left: 0.625em;
+  min-width: 12.5em;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-background,
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.progress-bar-background {
+  background-color: #555;
+  width: 100%;
+}
+
+.progress-bar-fill {
+  background-color: #beb8b8;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.artist-name,
+.track-name,
+.album-name,
+.user-name {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.artist-name {
+  font-size: 1em;
+  margin-top: 1.1em;
+}
+
+.track-name {
+  font-size: 1.5em;
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+}
+
+.album-name {
+  font-size: 1em;
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-family: Arial, sans-serif;
+  font-size: 0.875em;
+  margin-top: 0.3125em;
+  width: 100%;
+  position: relative;
+  bottom: -0.375em;
+}
+
+.artist-name a,
+.track-name a,
+.album-name a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.artist-name a:hover,
+.album-name a:hover,
+.track-name a:hover {
+  text-decoration: underline;
+}
+
+.user-info {
+  position: absolute;
+  top: 1.25em;
+  right: 1.25em;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 3.75em;
+  height: 3.75em;
+  border-radius: 50%;
+  margin-right: 0.625em;
+}
+
+.user-name {
+  font-size: 1.625em;
+}
+
+.credit,
+.space-y-0 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Roboto", bold, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.credit {
+  bottom: 50px;
+  font-size: 1.5625em;
+}
+
+.credit a {
+  text-decoration: underline;
+}
+
+.credit a:hover {
+  text-decoration: none;
+}
+
+.space-y-0 {
+  bottom: 1.25em;
+  color: #ccc;
+}
+
+.animate-float {
+  animation: float 2s linear infinite;
+}
+
+.not-playing {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}

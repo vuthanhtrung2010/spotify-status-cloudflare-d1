@@ -1,11 +1,11 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "008ee181-36ed-4cc3-b593-481f13e2254a",
+  "id": "750da872-27ea-44bd-b9d0-70973e9fddae",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "guestBook": {
-      "name": "guestBook",
+    "users": {
+      "name": "users",
       "columns": {
         "id": {
           "name": "id",
@@ -14,24 +14,31 @@
           "notNull": true,
           "autoincrement": true
         },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "refreshToken": {
+          "name": "refreshToken",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
-        "guestBook_email_unique": {
-          "name": "guestBook_email_unique",
+        "users_email_unique": {
+          "name": "users_email_unique",
           "columns": [
             "email"
           ],
