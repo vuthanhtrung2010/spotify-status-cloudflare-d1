@@ -2,8 +2,9 @@ import { authorizationCodeGrant, getMe, caches } from "~/data";
 import { eq } from "drizzle-orm";
 import * as schema from "~/database/schema";
 import { redirect } from "react-router";
+import type { Route } from "./+types/callback";
 
-export async function loader({ request, context }: any) {
+export async function loader({ request, context }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
 
