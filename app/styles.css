@@ -1,7 +1,6 @@
 /* Universal reset for margin, padding, and box-sizing */
 
 /* Font faces */
-
 @font-face {
   font-family: 'Roboto';
   src: url('./fonts/Roboto/Roboto-Regular.ttf') format('truetype');
@@ -16,6 +15,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto/Roboto-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 *,
 *::before,
 *::after {
@@ -27,189 +40,466 @@
 html,
 body {
   height: 100%;
-  background-color: #04022b;
-  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
   scroll-behavior: smooth;
-}
-
-/* Container styling */
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  min-width: 37.5em;
-  padding: 1.25em;
-  border: 0.125em solid #ccc;
-  border-radius: 0.3125em;
-  background-color: #0a081f;
-  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
-}
-
-.track-info-container {
-  display: flex;
-  align-items: center;
-}
-
-.track-image {
-  max-width: 10.3125em;
-  max-height: 10.3125em;
-  border-radius: 0.3125em;
-  margin-right: 1.25em;
-}
-
-.track-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.progress-bar-container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-}
-
-.progress-bar {
-  flex: 1;
-  height: 0.5em;
-  background-color: #333;
-  border-radius: 0.25em;
-  margin-left: 0.625em;
-  min-width: 12.5em;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow: hidden;
-  position: relative;
 }
 
-.progress-bar-background,
-.progress-bar-fill {
+/* Animated background particles */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(1deg); }
+  66% { transform: translateY(10px) rotate(-1deg); }
+}
+
+/* Modern container styling */
+.modern-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Modern card with glassmorphism */
+.modern-card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Card background blur effect */
+.card-background {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(40px) brightness(0.3);
+  transform: scale(1.1);
+  z-index: -1;
 }
 
-.progress-bar-background {
-  background-color: #555;
-  width: 100%;
-}
-
-.progress-bar-fill {
-  background-color: #beb8b8;
-  width: 0%;
-  transition: width 0.5s ease;
-}
-
-.artist-name,
-.track-name,
-.album-name,
-.user-name {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-}
-
-.artist-name {
-  font-size: 1em;
-  margin-top: 1.1em;
-}
-
-.track-name {
-  font-size: 1.5em;
-  margin-top: 0.625em;
-  margin-bottom: 0.625em;
-}
-
-.album-name {
-  font-size: 1em;
-  margin-top: 0.625em;
-  margin-bottom: 0.625em;
-}
-
-.time-display {
-  display: flex;
-  justify-content: space-between;
-  font-family: Arial, sans-serif;
-  font-size: 0.875em;
-  margin-top: 0.3125em;
-  width: 100%;
+/* Card content */
+.card-content {
   position: relative;
-  bottom: -0.375em;
+  padding: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
 }
 
-.artist-name a,
-.track-name a,
-.album-name a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s, text-decoration 0.3s;
+/* Album art container */
+.album-art-container {
+  position: relative;
+  flex-shrink: 0;
 }
 
-.artist-name a:hover,
-.album-name a:hover,
-.track-name a:hover {
-  text-decoration: underline;
+.album-art {
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.user-info {
+.album-art-shadow {
   position: absolute;
-  top: 1.25em;
-  right: 1.25em;
+  top: 8px;
+  left: 8px;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.album-art:hover {
+  transform: scale(1.02);
+}
+
+/* Track information */
+.track-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Track header with Spotify badge */
+.track-header {
   display: flex;
   align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.spotify-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(30, 215, 96, 0.2);
+  border: 1px solid rgba(30, 215, 96, 0.3);
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1ed760;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Track title */
+.track-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  color: #ffffff;
+}
+
+.track-link {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.track-link:hover {
+  background-size: 100% 2px;
+  background-image: linear-gradient(90deg, #1ed760, #1db954);
+}
+
+/* Artist names */
+.artist-names {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem 0;
+}
+
+.artist-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.artist-link:hover {
+  color: #1ed760;
+}
+
+/* Album title */
+.album-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0.25rem 0 1rem 0;
+}
+
+.album-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.album-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Progress section */
+.progress-section {
+  margin-top: auto;
+}
+
+.time-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Modern progress bar */
+.progress-track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1ed760, #1db954);
+  border-radius: 3px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-20px); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0; }
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeInThumb 0.5s ease forwards 0.3s;
+}
+
+@keyframes fadeInThumb {
+  to { opacity: 1; }
+}
+
+/* Not playing state */
+.not-playing-card {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.spotify-icon {
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.not-playing-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.not-playing-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modern-container {
+    padding: 1rem;
+  }
+  
+  .card-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .album-art-container {
+    align-self: center;
+  }
+  
+  .track-title {
+    font-size: 1.3rem;
+  }
+  
+  .artist-names {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .album-art {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .album-art-shadow {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .track-title {
+    font-size: 1.2rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+}
+
+/* User info styling - restored */
+.user-info {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem 0.75rem 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.user-info:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .user-avatar {
-  width: 3.75em;
-  height: 3.75em;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  margin-right: 0.625em;
+  margin-right: 0.75rem;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
 }
 
 .user-name {
-  font-size: 1.625em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* Credit and footer styling - restored and modernized */
 .credit,
 .space-y-0 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-family: "Roboto", bold, sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .credit {
-  bottom: 50px;
-  font-size: 1.5625em;
+  bottom: 3rem;
+  font-size: 1rem;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .credit a {
-  text-decoration: underline;
+  color: #1ed760;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .credit a:hover {
-  text-decoration: none;
+  color: #1db954;
+  text-decoration: underline;
 }
 
 .space-y-0 {
-  bottom: 1.25em;
-  color: #ccc;
+  bottom: 1.25rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
 }
 
-.animate-float {
-  animation: float 2s linear infinite;
-}
-
-.not-playing {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
+/* Responsive adjustments for user info */
+@media (max-width: 768px) {
+  .user-info {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+  }
+  
+  .user-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .user-name {
+    font-size: 1rem;
+  }
+  
+  .credit {
+    bottom: 2rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
 }
